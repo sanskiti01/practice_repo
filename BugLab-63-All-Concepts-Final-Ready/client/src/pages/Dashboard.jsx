@@ -1,0 +1,2 @@
+import React,{useEffect,useState} from 'react'; import {api} from '../services/api';
+export default function Dashboard(){const [stats,setStats]=useState(null);const [error,setError]=useState('');useEffect(()=>{api('/bugs/stats').then(setStats).catch(e=>setError(e.message));},[]);return <section><h2>Debugger Dashboard</h2>{error&&<p className="error">{error}</p>}{!stats&&!error?<p>Loading dashboard…</p>:stats&&<div className="cards"><article>{stats.total} bugs</article><article>{stats.solved} solved</article><article>{stats.avgTime}s avg time</article></div>}</section>}

@@ -1,0 +1,1 @@
+import test from 'node:test';import assert from 'node:assert/strict';import {validateStructured} from '../services/aiService.js';test('structured AI output is validated',()=>{assert.equal(validateStructured({summary:'a',rootCause:'b',fix:'c',verification:'d',confidence:.8}).confidence,.8);assert.throws(()=>validateStructured({summary:'a'}))});

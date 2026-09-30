@@ -1,0 +1,2 @@
+import {Router} from 'express'; import {register,login,google} from '../controllers/authController.js'; import {validateBody} from '../middleware/validate.js'; import {z} from 'zod';
+const r=Router();const schema=z.object({email:z.string().email(),username:z.string().min(2).max(40),password:z.string().min(8)});r.post('/register',validateBody(schema),register);r.post('/login',login);r.get('/google',google);export default r;

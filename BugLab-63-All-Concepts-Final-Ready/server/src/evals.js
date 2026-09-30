@@ -1,0 +1,1 @@
+export const evalSet=[{input:'Cannot read properties of undefined',keywords:['undefined','property']},{input:'CORS request blocked',keywords:['cors','headers']},{input:'JWT expired',keywords:['jwt','expiry']}];

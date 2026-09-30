@@ -1,0 +1,5 @@
+datasource db { provider = "postgresql" url = env("DATABASE_URL") }
+generator client { provider = "prisma-client-js" }
+model User { id Int @id @default(autoincrement()) email String @unique username String role String @default("USER") passwordHash String createdAt DateTime @default(now()) attempts BugAttempt[] }
+model Bug { id Int @id @default(autoincrement()) title String description String difficulty String language String topic String createdAt DateTime @default(now()) attempts BugAttempt[] }
+model BugAttempt { id Int @id @default(autoincrement()) userId Int bugId Int submittedSolution String status String hintsUsed Int @default(0) timeSpent Int @default(0) createdAt DateTime @default(now()) user User @relation(fields:[userId],references:[id]) bug Bug @relation(fields:[bugId],references:[id]) @@index([userId]) @@index([bugId]) }

@@ -1,0 +1,1 @@
+import test from 'node:test';import assert from 'node:assert/strict';test('input concept: control characters are not part of normal user text',()=>{const s='hello\u0000 world'.replace(/[\u0000-\u001F]/g,' ');assert.equal(s,'hello  world')});

@@ -1,0 +1,4 @@
+import {z} from 'zod'; import multer from 'multer';
+export const bugSchema=z.object({title:z.string().trim().min(3).max(120),description:z.string().trim().min(5).max(5000),difficulty:z.enum(['EASY','MEDIUM','HARD']).default('EASY'),language:z.string().trim().min(1).max(30),topic:z.string().trim().min(1).max(80)});
+export const validateBody=schema=>(req,res,next)=>{const r=schema.safeParse(req.body);if(!r.success)return res.status(400).json({message:'Invalid request body',errors:r.error.flatten()});req.body=r.data;next()};
+const storage=multer.diskStorage({destination:'server/uploads',filename:(req,file,cb)=>cb(null,`${Date.now()}-${file.originalname.replace(/[^a-zA-Z0-9._-]/g,'_')}`)});export const upload=multer({storage,limits:{fileSize:2*1024*1024},fileFilter:(req,file,cb)=>/\.(txt|js|json|log|md)$/i.test(file.originalname)?cb(null,true):cb(new Error('Only txt, js, json, log and md files are allowed'))});
